@@ -14,12 +14,16 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Material App',
-      theme: ThemeData.light(), // .dark() Tema oscuro.
-      initialRoute: 'welcome_screen',
+      title: 'DAM project App',
+      theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.grey[300]
+      ),
+      //TODO: Change the initialRoute to welcome_screen
+      initialRoute: 'login_screen',
       routes: {
-        'home_screen': (_) => const HomeScreen(),
         'welcome_screen': (_) => const WelcomeScreen(),
+        'login_screen'  : (_) => const LoginScreen(),
+        'home_screen'   : (_) => const HomeScreen(),
       },
     );
   }
