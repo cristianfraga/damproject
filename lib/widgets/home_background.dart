@@ -1,13 +1,13 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:damproject/config/colors.dart';
-import 'package:damproject/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class AuthBackground extends StatelessWidget {
+class HomeBackground extends StatelessWidget {
   final Widget child;
 
-  const AuthBackground({Key? key, required this.child}) : super(key: key);
+  const HomeBackground({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,23 +16,16 @@ class AuthBackground extends StatelessWidget {
       height: double.infinity,
       child: Stack(
         children: [
-          const _ColorBox(),
-          const Positioned(
-            top: 30,
-            left: 0,
-            right: 0,
-            child: HeaderAvatar(),
-          ),
+          const _GradientBackground(),
           child,
         ],
       ),
     );
   }
-
 }
 
-class _ColorBox extends StatelessWidget {
-  const _ColorBox();
+class _GradientBackground extends StatelessWidget {
+  const _GradientBackground();
 
   @override
   Widget build(BuildContext context) {
@@ -41,59 +34,45 @@ class _ColorBox extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: size.height * 0.4,
-      decoration: _colorDecoration(),
-      child: Stack(
-        children: const [
-          Positioned(
-            top: 90,
-            left: 30,
-            child: _Bubble(),
-          ),
-          Positioned(
-            top: -40,
-            left: -30,
-            child: _Bubble(),
-          ),
-          Positioned(
-            top: -50,
-            right: -20,
-            child: _Bubble(),
-          ),
-          Positioned(
-            bottom: -50,
-            left: 100,
-            child: _Bubble(),
-          ),
-          Positioned(
-            bottom: 120,
-            right: 20,
-            child: _Bubble(),
-          ),
-        ],
-      ),
-    );
-  }
-
-  BoxDecoration _colorDecoration() => const BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
             blue,
             cyan,
           ],
         ),
-      );
+      ),
+      child: Stack(
+        children: List.generate(5, (index) {
+          final bubbleSize = Random().nextInt(50) + 50.0;
+          final bubblePosition = Offset(
+            Random().nextDouble() * size.width,
+            Random().nextDouble() * (size.height * 0.4 - bubbleSize),
+          );
+
+          return Positioned(
+            top: bubblePosition.dy,
+            left: bubblePosition.dx,
+            child: _Bubble(size: bubbleSize),
+          );
+        }),
+      ),
+    );
+  }
 }
 
 class _Bubble extends StatelessWidget {
-  const _Bubble();
+  final double size;
+
+  const _Bubble({required this.size});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
-      height: 100,
+      width: size,
+      height: size,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100),
+        borderRadius: BorderRadius.circular(size / 2),
         color: white.withOpacity(0.05),
         boxShadow: [
           BoxShadow(

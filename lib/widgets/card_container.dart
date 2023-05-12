@@ -1,7 +1,7 @@
+import 'package:damproject/config/colors.dart';
 import 'package:flutter/material.dart';
 
 class CardContainer extends StatelessWidget {
-
   final Widget child;
 
   const CardContainer({super.key, required this.child});
@@ -20,14 +20,14 @@ class CardContainer extends StatelessWidget {
   }
 
   BoxDecoration _cardShape() => BoxDecoration(
-    color: Colors.white,
-    borderRadius: BorderRadius.circular(25),
-    boxShadow: const [
-      BoxShadow(
-        color: Colors.black12,
-        blurRadius: 15,
-        offset: Offset(0,5),
-      ),
-    ],
-  );
+        color: white,
+        borderRadius: BorderRadius.circular(25),
+        boxShadow: const [
+          BoxShadow(
+            color: black12,
+            blurRadius: 15,
+            offset: Offset(0, 5),
+          ),
+        ],
+      );
 }

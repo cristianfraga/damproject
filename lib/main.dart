@@ -1,3 +1,6 @@
+import 'package:damproject/config/colors.dart';
+import 'package:damproject/config/strings.dart';
+import 'package:damproject/providers/providers.dart';
 import 'package:damproject/screens/screens.dart';
 import 'package:damproject/services/services.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +16,7 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthService()),
+        ChangeNotifierProvider(create: (_) => HomeFormProvider()),
       ],
       child: const MyApp(),
     );
@@ -26,23 +30,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'DAM project App',
-      initialRoute: 'check_screen',
+      title: appTitle,
+      initialRoute: 'welcome_screen',
       routes: {
         'welcome_screen': (_) => const WelcomeScreen(),
-
         'login_screen': (_) => const LoginScreen(),
         'register_screen': (_) => const RegisterScreen(),
         'check_screen': (_) => const CheckAuthScreen(),
-
         'home_screen': (_) => const HomeScreen(),
       },
       scaffoldMessengerKey: NotificationsService.messengerKey,
       theme: ThemeData.light().copyWith(
-          scaffoldBackgroundColor: Colors.grey[300],
-          appBarTheme: const AppBarTheme(elevation: 0, color: Colors.indigo),
+          scaffoldBackgroundColor: grey,
+          appBarTheme: const AppBarTheme(elevation: 0, color: indigo),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
-              backgroundColor: Colors.indigo, elevation: 0)),
+              backgroundColor: indigo, elevation: 0)),
     );
   }
 }

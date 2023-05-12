@@ -1,3 +1,4 @@
+import 'package:damproject/config/colors.dart';
 import 'package:flutter/material.dart';
 
 class InputDecorations {
@@ -10,22 +11,22 @@ class InputDecorations {
       prefixIcon: prefixIcon != null
           ? Icon(
               prefixIcon,
-              color: Colors.deepPurple,
+              color: rust,
             )
           : null,
       labelText: labelText,
-      labelStyle: const TextStyle(
-        color: Colors.grey,
+      labelStyle: TextStyle(
+        color: grey,
       ),
       hintText: hintText,
       enabledBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
-          color: Colors.deepPurple,
+          color: rust,
         ),
       ),
       focusedBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
-          color: Colors.deepPurple,
+          color: rust,
           width: 2,
         ),
       ),

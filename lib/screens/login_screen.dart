@@ -1,12 +1,11 @@
+import 'package:damproject/config/colors.dart';
+import 'package:damproject/config/strings.dart';
+import 'package:damproject/providers/login_form_provider.dart';
 import 'package:damproject/services/services.dart';
 import 'package:damproject/ui/input_decorations.dart';
 import 'package:damproject/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../providers/login_form_provider.dart';
-
-// A Flutter widget for the login screen.
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -18,22 +17,16 @@ class LoginScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(
-                height: 250,
-              ),
+              const SizedBox(height: 250),
               CardContainer(
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
                     Text(
-                      'Login',
+                      login,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
-                    const SizedBox(
-                      height: 30,
-                    ),
+                    const SizedBox(height: 30),
                     Builder(
                       builder: (BuildContext context) => ChangeNotifierProvider(
                         create: (_) => LoginFormProvider(),
@@ -43,28 +36,24 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 50,
-              ),
+              const SizedBox(height: 50),
               TextButton(
                 onPressed: () => Navigator.of(context)
                     .pushReplacementNamed('register_screen'),
                 style: ButtonStyle(
                   overlayColor:
-                      MaterialStateProperty.all(Colors.indigo.withOpacity(0.1)),
+                      MaterialStateProperty.all(indigo.withOpacity(0.1)),
                   shape: MaterialStateProperty.all(const StadiumBorder()),
                 ),
                 child: const Text(
-                  'Create new account',
+                  newAccount,
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black54),
+                      color: black54),
                 ),
               ),
-              const SizedBox(
-                height: 50,
-              ),
+              const SizedBox(height: 50),
             ],
           ),
         ),
@@ -85,52 +74,45 @@ class _LoginForm extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
-          // Email field
           TextFormField(
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecorations.authInputDecoration(
-                labelText: 'Email',
-                hintText: 'john.doe@email.com',
-                prefixIcon: Icons.alternate_email_outlined),
+              labelText: email,
+              hintText: emailHint,
+              prefixIcon: Icons.email_outlined,
+            ),
             onChanged: (value) => loginForm.email = value,
             validator: (value) {
-              String pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
-              RegExp regExp = RegExp(pattern);
-              return regExp.hasMatch(value ?? '')
-                  ? null
-                  : 'Invalid email address';
+              RegExp regExp = RegExp(emailRegex);
+              return regExp.hasMatch(value ?? '') ? null : emailError;
             },
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          // Password field
+          const SizedBox(height: 30),
           TextFormField(
             autocorrect: false,
             obscureText: true,
             keyboardType: TextInputType.visiblePassword,
             decoration: InputDecorations.authInputDecoration(
-                labelText: 'Password',
-                hintText: '********',
-                prefixIcon: Icons.lock_outline),
+              labelText: password,
+              hintText: passwordHint,
+              prefixIcon: Icons.lock_outline,
+            ),
             onChanged: (value) => loginForm.password = value,
             validator: (value) {
               return (value != null && value.length >= 8)
                   ? null
-                  : 'Password must be at least 8 characters long';
+                  : passwordError;
             },
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          // Submit button
+          const SizedBox(height: 30),
           MaterialButton(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            disabledColor: Colors.grey,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            disabledColor: grey,
             elevation: 0,
-            color: Colors.deepPurple,
+            color: cyan,
             onPressed: loginForm.isLoading
                 ? null
                 : () async {
@@ -140,19 +122,21 @@ class _LoginForm extends StatelessWidget {
                     if (!loginForm.isValidForm()) return;
                     loginForm.isLoading = true;
                     final String? errorMessage = await authService.login(
-                        loginForm.email, loginForm.password);
+                      loginForm.email,
+                      loginForm.password,
+                    );
                     if (errorMessage == null) {
                       Navigator.of(context).pushReplacementNamed('home_screen');
                     } else {
-                      NotificationsService.showSnackbar('Incorrect username or password');
+                      NotificationsService.showSnackbar(inputsError);
                       loginForm.isLoading = false;
                     }
                   },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
               child: Text(
-                loginForm.isLoading ? 'Loading...' : 'Submit',
-                style: const TextStyle(color: Colors.white),
+                loginForm.isLoading ? loading : submit,
+                style: const TextStyle(color: white),
               ),
             ),
           ),

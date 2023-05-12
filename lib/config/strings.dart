@@ -1,0 +1,24 @@
+const String emailRegex = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+
+const String appTitle = 'MyBrand';
+const String businessCard = 'BUSINESS CARD';
+const String curriculum = 'CURRICULUM';
+const String email = 'Email';
+const String emailError = 'Invalid email address';
+const String emailHint = 'john.doe@email.com';
+const String emailTaken = 'Email already registered';
+const String inputsError = 'Incorrect username or password';
+const String loading = 'Loading...';
+const String login = 'Login';
+const String newAccount = 'Create new account';
+const String openAccount = 'Log into your account';
+const String password = 'Password';
+const String passwordError = 'Password must be at least 8 characters long';
+const String passwordHint = '********';
+const String portfolio = 'PORTFOLIO';
+const String register = 'Sign Up';
+const String slogan = 'Rebrand yourself!';
+const String socialNetworks = 'SOCIAL NETWORKS';
+const String startNow = 'Start now';
+const String submit = 'Submit';
+const String homeScreen = 'Welcome';

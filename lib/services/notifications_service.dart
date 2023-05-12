@@ -1,3 +1,4 @@
+import 'package:damproject/config/colors.dart';
 import 'package:flutter/material.dart';
 
 class NotificationsService {
@@ -6,8 +7,8 @@ class NotificationsService {
 
   static showSnackbar(String message) {
     final snackBar = SnackBar(
-      content: Text(message,
-          style: const TextStyle(color: Colors.white, fontSize: 20)),
+      content:
+          Text(message, style: const TextStyle(color: white, fontSize: 20)),
     );
     messengerKey.currentState!.showSnackBar(snackBar);
   }
