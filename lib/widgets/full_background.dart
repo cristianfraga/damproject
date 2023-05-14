@@ -1,9 +1,10 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:damproject/config/colors.dart';
+import 'package:damproject/config/config.dart';
 import 'package:flutter/material.dart';
 
+// This code defines a Flutter widget called FullBackground that creates a full-screen background with gradient and animated bubbles.
 class FullBackground extends StatelessWidget {
   final Widget child;
 
@@ -11,13 +12,15 @@ class FullBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return SizedBox(
       width: double.infinity,
       height: double.infinity,
       child: Stack(
         children: [
           const _GradientBackground(),
-          _BubblesLayer(),
+          _BubblesLayer(size: size),
           child,
         ],
       ),
@@ -25,33 +28,32 @@ class FullBackground extends StatelessWidget {
   }
 }
 
+// This widget represents the gradient background layer.
 class _GradientBackground extends StatelessWidget {
   const _GradientBackground();
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            blue,
-            cyan,
-          ],
+          colors: [blue.withOpacity(0.2), cyan.withOpacity(0.2)],
         ),
       ),
     );
   }
 }
 
+// This widget represents the layer of animated bubbles.
 class _BubblesLayer extends StatelessWidget {
+  final Size size;
+
+  const _BubblesLayer({required this.size});
+
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Positioned.fill(
       child: Stack(
         children: List.generate(20, (index) {
@@ -72,6 +74,7 @@ class _BubblesLayer extends StatelessWidget {
   }
 }
 
+// This widget represents an individual bubble.
 class _Bubble extends StatelessWidget {
   final double size;
 

@@ -1,6 +1,7 @@
-import 'package:damproject/config/colors.dart';
+import 'package:damproject/config/config.dart';
 import 'package:flutter/material.dart';
 
+// This code defines a reusable CardContainer widget in Flutter.
 class CardContainer extends StatelessWidget {
   final Widget child;
 
@@ -8,6 +9,7 @@ class CardContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // This method builds the CardContainer widget.
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Container(
@@ -19,15 +21,12 @@ class CardContainer extends StatelessWidget {
     );
   }
 
+  // Returns the BoxDecoration for the card shape.
   BoxDecoration _cardShape() => BoxDecoration(
         color: white,
         borderRadius: BorderRadius.circular(25),
         boxShadow: const [
-          BoxShadow(
-            color: black12,
-            blurRadius: 15,
-            offset: Offset(0, 5),
-          ),
+          BoxShadow(color: black12, blurRadius: 15, offset: Offset(0, 5)),
         ],
       );
 }

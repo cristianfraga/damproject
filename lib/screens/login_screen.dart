@@ -1,12 +1,17 @@
-import 'package:damproject/config/colors.dart';
-import 'package:damproject/config/strings.dart';
-import 'package:damproject/providers/login_form_provider.dart';
+import 'package:damproject/config/config.dart';
+import 'package:damproject/providers/providers.dart';
 import 'package:damproject/services/services.dart';
-import 'package:damproject/ui/input_decorations.dart';
+import 'package:damproject/ui/ui.dart';
 import 'package:damproject/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// This code represents a login screen in a Flutter application.
+// It contains two main widgets: `LoginScreen` and `_LoginForm`.
+
+// LoginScreen is a StatelessWidget that displays the login screen UI.
+// It includes a background, a card container for the login form, and buttons for navigation.
+// The login form is implemented using the _LoginForm widget.
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -23,7 +28,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 10),
                     Text(
-                      login,
+                      loginTitle,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     const SizedBox(height: 30),
@@ -46,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                   shape: MaterialStateProperty.all(const StadiumBorder()),
                 ),
                 child: const Text(
-                  newAccount,
+                  newAccountButton,
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -62,6 +67,8 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
+// _LoginForm is a StatelessWidget that represents the login form.
+// It provides the UI for entering email and password and handles form validation and submission.
 class _LoginForm extends StatelessWidget {
   const _LoginForm();
 
@@ -78,10 +85,9 @@ class _LoginForm extends StatelessWidget {
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecorations.authInputDecoration(
-              labelText: email,
-              hintText: emailHint,
-              prefixIcon: Icons.email_outlined,
-            ),
+                labelText: emailInput,
+                hintText: emailHint,
+                prefixIcon: Icons.email_outlined),
             onChanged: (value) => loginForm.email = value,
             validator: (value) {
               RegExp regExp = RegExp(emailRegex);
@@ -94,10 +100,9 @@ class _LoginForm extends StatelessWidget {
             obscureText: true,
             keyboardType: TextInputType.visiblePassword,
             decoration: InputDecorations.authInputDecoration(
-              labelText: password,
-              hintText: passwordHint,
-              prefixIcon: Icons.lock_outline,
-            ),
+                labelText: passwordInput,
+                hintText: passwordHint,
+                prefixIcon: Icons.lock_outline),
             onChanged: (value) => loginForm.password = value,
             validator: (value) {
               return (value != null && value.length >= 8)
@@ -122,9 +127,7 @@ class _LoginForm extends StatelessWidget {
                     if (!loginForm.isValidForm()) return;
                     loginForm.isLoading = true;
                     final String? errorMessage = await authService.login(
-                      loginForm.email,
-                      loginForm.password,
-                    );
+                        loginForm.email, loginForm.password);
                     if (errorMessage == null) {
                       Navigator.of(context).pushReplacementNamed('home_screen');
                     } else {
@@ -135,7 +138,7 @@ class _LoginForm extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
               child: Text(
-                loginForm.isLoading ? loading : submit,
+                loginForm.isLoading ? loadingButton : submitButton,
                 style: const TextStyle(color: white),
               ),
             ),

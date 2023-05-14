@@ -1,5 +1,4 @@
-import 'package:damproject/config/colors.dart';
-import 'package:damproject/config/strings.dart';
+import 'package:damproject/config/config.dart';
 import 'package:damproject/providers/providers.dart';
 import 'package:damproject/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +9,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Obtain an instance of HeaderFormProvider using the Provider.of() method.
+    final headerForm = Provider.of<HeaderFormProvider>(context);
+    // Build the UI for the HomeScreen.
     return Scaffold(
-      appBar: const CustomAppBar(title: homeScreen),
+      appBar: const CustomAppBarBackHome(
+        title: homeScreenTitle,
+        showBackButton: false,
+      ),
       body: HomeBackground(
         child: SingleChildScrollView(
           child: Column(
@@ -19,20 +24,54 @@ class HomeScreen extends StatelessWidget {
             children: [
               const HeaderAvatar(),
               const SizedBox(height: 20),
-              _buildInputField(context, 'Full name', 24),
-              _buildInputField(context, 'Profession', 20),
+              _buildInputField(
+                context,
+                // If headerForm.fullName is not empty, use its value; otherwise, use fullNameHint.
+                headerForm.fullName.isNotEmpty
+                    ? headerForm.fullName
+                    : fullNameHint,
+                24,
+              ),
+              _buildInputField(
+                context,
+                // If headerForm.profession is not empty, use its value; otherwise, use professionHint.
+                headerForm.profession.isNotEmpty
+                    ? headerForm.profession
+                    : professionHint,
+                20,
+              ),
               const SizedBox(height: 70),
-              _buildButtonRow(businessCard, Icons.qr_code, context,
-                  'business_card_screen', 'business_card_qr_screen'),
+              _buildButtonRow(
+                businessCardButton,
+                Icons.qr_code,
+                context,
+                'business_card_screen',
+                'business_card_qr_screen',
+              ),
               const SizedBox(height: 10),
-              _buildButtonRow(curriculum, Icons.qr_code, context,
-                  'curriculum_screen', 'curriculum_qr_screen'),
+              _buildButtonRow(
+                curriculumButton,
+                Icons.qr_code,
+                context,
+                'curriculum_screen',
+                'curriculum_qr_screen',
+              ),
               const SizedBox(height: 10),
-              _buildButtonRow(portfolio, Icons.qr_code, context,
-                  'portfolio_screen', 'portfolio_qr_screen'),
+              _buildButtonRow(
+                portfolioButton,
+                Icons.qr_code,
+                context,
+                'portfolio_screen',
+                'portfolio_qr_screen',
+              ),
               const SizedBox(height: 10),
-              _buildButtonRow(socialNetworks, Icons.qr_code, context,
-                  'social_networks_screen', 'social_networks_qr_screen'),
+              _buildButtonRow(
+                socialNetworksButton,
+                Icons.qr_code,
+                context,
+                'social_networks_screen',
+                'social_networks_qr_screen',
+              ),
               const SizedBox(height: 60),
             ],
           ),
@@ -41,8 +80,10 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  // Build an input field widget.
   Widget _buildInputField(BuildContext context, String hint, double fontSize) {
-    var formData = Provider.of<HomeFormProvider>(context);
+    // Obtain an instance of HeaderFormProvider using the Provider.of() method.
+    var formData = Provider.of<HeaderFormProvider>(context);
 
     return SizedBox(
       height: 40,
@@ -69,9 +110,9 @@ class HomeScreen extends StatelessWidget {
           border: InputBorder.none,
         ),
         onChanged: (value) {
-          if (hint == 'Full name') {
+          if (hint == fullNameHint) {
             formData.fullName = value;
-          } else if (hint == 'Profession') {
+          } else if (hint == professionHint) {
             formData.profession = value;
           }
         },
@@ -79,7 +120,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-
+  // Build a row of buttons.
   Widget _buildButtonRow(String text, IconData icon, BuildContext context,
       String routeName, String qrRouteName) {
     return Row(
@@ -87,7 +128,7 @@ class HomeScreen extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed(routeName);
+            Navigator.of(context).pushNamed(routeName);
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: brown,
@@ -100,7 +141,7 @@ class HomeScreen extends StatelessWidget {
         const SizedBox(width: 10),
         ElevatedButton.icon(
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed(qrRouteName);
+            Navigator.of(context).pushNamed(qrRouteName);
           },
           style: ElevatedButton.styleFrom(
               minimumSize: const Size(50, 50),

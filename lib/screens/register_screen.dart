@@ -1,12 +1,14 @@
-import 'package:damproject/config/colors.dart';
-import 'package:damproject/config/strings.dart';
-import 'package:damproject/providers/login_form_provider.dart';
+import 'package:damproject/config/config.dart';
+import 'package:damproject/providers/providers.dart';
 import 'package:damproject/services/services.dart';
-import 'package:damproject/ui/input_decorations.dart';
+import 'package:damproject/ui/ui.dart';
 import 'package:damproject/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// This code represents a register screen in a Flutter application.
+// The screen allows users to create a new account by providing their email and password.
+// RegisterScreen is a StatelessWidget that represents the register screen of the application.
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -23,7 +25,7 @@ class RegisterScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 10),
                     Text(
-                      register,
+                      registerTitle,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     const SizedBox(height: 30),
@@ -38,21 +40,18 @@ class RegisterScreen extends StatelessWidget {
               ),
               const SizedBox(height: 50),
               TextButton(
-                onPressed: () =>
-                    Navigator.of(context).pushReplacementNamed('login_screen'),
-                style: ButtonStyle(
-                  overlayColor:
-                      MaterialStateProperty.all(indigo.withOpacity(0.1)),
-                  shape: MaterialStateProperty.all(const StadiumBorder()),
-                ),
-                child: const Text(
-                  openAccount,
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: black54),
-                ),
-              ),
+                  onPressed: () => Navigator.of(context)
+                      .pushReplacementNamed('login_screen'),
+                  style: ButtonStyle(
+                    overlayColor:
+                        MaterialStateProperty.all(indigo.withOpacity(0.1)),
+                    shape: MaterialStateProperty.all(const StadiumBorder()),
+                  ),
+                  child: const Text(openAccountButton,
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: black54))),
               const SizedBox(height: 50),
             ],
           ),
@@ -62,6 +61,7 @@ class RegisterScreen extends StatelessWidget {
   }
 }
 
+// _LoginForm is a StatelessWidget that represents the login form within the register screen.
 class _LoginForm extends StatelessWidget {
   const _LoginForm();
 
@@ -78,10 +78,9 @@ class _LoginForm extends StatelessWidget {
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecorations.authInputDecoration(
-              labelText: email,
-              hintText: emailHint,
-              prefixIcon: Icons.email_outlined,
-            ),
+                labelText: emailInput,
+                hintText: emailHint,
+                prefixIcon: Icons.email_outlined),
             onChanged: (value) => loginForm.email = value,
             validator: (value) {
               RegExp regExp = RegExp(emailRegex);
@@ -94,10 +93,9 @@ class _LoginForm extends StatelessWidget {
             obscureText: true,
             keyboardType: TextInputType.visiblePassword,
             decoration: InputDecorations.authInputDecoration(
-              labelText: password,
-              hintText: passwordHint,
-              prefixIcon: Icons.lock_outline,
-            ),
+                labelText: passwordInput,
+                hintText: passwordHint,
+                prefixIcon: Icons.lock_outline),
             onChanged: (value) => loginForm.password = value,
             validator: (value) {
               return (value != null && value.length >= 8)
@@ -122,9 +120,7 @@ class _LoginForm extends StatelessWidget {
                     if (!loginForm.isValidForm()) return;
                     loginForm.isLoading = true;
                     final String? errorMessage = await authService.createUser(
-                      loginForm.email,
-                      loginForm.password,
-                    );
+                        loginForm.email, loginForm.password);
                     if (errorMessage == null) {
                       Navigator.of(context).pushReplacementNamed('home_screen');
                     } else {
@@ -135,7 +131,7 @@ class _LoginForm extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
               child: Text(
-                loginForm.isLoading ? loading : submit,
+                loginForm.isLoading ? loadingButton : submitButton,
                 style: const TextStyle(color: white),
               ),
             ),

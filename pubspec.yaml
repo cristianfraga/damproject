@@ -1,22 +1,31 @@
 ---
-name: damproject
-description: Project for DAM
-publish_to: none
-version: 1.0.0+1
-environment:
+name: damproject  # Name of the project
+description: Project for DAM  # Description of the project
+publish_to: none  # Specifies that the project should not be published to any package repository
+version: 1.0.0+1  # Version number of the project
+
+environment:  # Specifies the required Dart SDK version
   sdk: '>=2.19.3 <3.0.0'
-dependencies:
-  flutter:
-    sdk: flutter
-  cupertino_icons: ^1.0.2
-  provider: ^6.0.5
-  http: ^0.13.6
-  flutter_secure_storage: ^8.0.0
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^2.0.0
-flutter:
-  uses-material-design: true
-  assets:
-    - assets\images\icon01.png
+
+dependencies:  # Specifies the project dependencies
+  flutter:  # Flutter framework dependency
+    sdk: flutter  # Specifies that the dependency is for the Flutter SDK
+  cupertino_icons: ^1.0.2  # Dependency for Cupertino icons
+  provider: ^6.0.5  # Dependency for state management
+  http: ^0.13.6  # Dependency for making HTTP requests
+  flutter_secure_storage: ^8.0.0  # Dependency for secure storage
+  flutter_barcode_scanner: ^2.0.0  # Dependency for barcode scanning
+  path_provider: ^2.0.15  # Dependency for accessing the device's file system
+  sqflite: ^2.2.8+2  # Dependency for SQLite database integration
+  url_launcher: ^6.1.11
+  google_maps_flutter: ^2.2.6
+
+dev_dependencies:  # Specifies development-only dependencies
+  flutter_test:  # Flutter testing dependency
+    sdk: flutter  # Specifies that the dependency is for the Flutter SDK
+  flutter_lints: ^2.0.0  # Dependency for linting and static analysis
+
+flutter:  # Flutter-specific configuration
+  uses-material-design: true  # Specifies that the project uses the Material Design
+  assets:  # Specifies the project's assets
+    - assets\images\icon01.png  # Path to the asset file
