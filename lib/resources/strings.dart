@@ -39,3 +39,13 @@ const String mapScreenTitle = 'Map';
 const String mapIconText = 'Map';
 const String urlIconText = 'Website';
 const String cancelButton = 'Cancel';
+
+const qrTitle = 'Scanner Go';
+const scanTabTitle = 'Scan';
+const historyTabTitle = 'History';
+const noResultFound = 'No result found';
+const noQrCodesScannedYet = 'No QR codes scanned yet';
+const tapToScan = 'Tap to scan QR code';
+const scannedAt = 'Scanned at';
+const anErrorOccurredPleaseTryAgainLater =
+    'An error occurred. Please try again later.';

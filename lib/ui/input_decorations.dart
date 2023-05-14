@@ -1,4 +1,4 @@
-import 'package:damproject/config/config.dart';
+import 'package:damproject/resources/resources.dart';
 import 'package:flutter/material.dart';
 
 // This code defines a class called InputDecorations that provides a static method for creating input decoration styles for authentication forms.

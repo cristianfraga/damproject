@@ -1,4 +1,4 @@
-import 'package:damproject/config/config.dart';
+import 'package:damproject/resources/resources.dart';
 import 'package:flutter/material.dart';
 
 // This code defines the WelcomeScreen widget, which displays a welcome screen with animations and transitions to the next screen.

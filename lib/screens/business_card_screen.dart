@@ -1,5 +1,5 @@
-import 'package:damproject/config/config.dart';
 import 'package:damproject/providers/providers.dart';
+import 'package:damproject/resources/resources.dart';
 import 'package:damproject/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

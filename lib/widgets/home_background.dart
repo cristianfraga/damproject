@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:damproject/config/config.dart';
+import 'package:damproject/resources/resources.dart';
 import 'package:flutter/material.dart';
 
 // This class represents the background of the home screen.

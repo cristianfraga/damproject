@@ -10,15 +10,20 @@ environment:  # Specifies the required Dart SDK version
 dependencies:  # Specifies the project dependencies
   flutter:  # Flutter framework dependency
     sdk: flutter  # Specifies that the dependency is for the Flutter SDK
-  cupertino_icons: ^1.0.2  # Dependency for Cupertino icons
-  provider: ^6.0.5  # Dependency for state management
-  http: ^0.13.6  # Dependency for making HTTP requests
-  flutter_secure_storage: ^8.0.0  # Dependency for secure storage
-  flutter_barcode_scanner: ^2.0.0  # Dependency for barcode scanning
-  path_provider: ^2.0.15  # Dependency for accessing the device's file system
-  sqflite: ^2.2.8+2  # Dependency for SQLite database integration
-  url_launcher: ^6.1.11
-  google_maps_flutter: ^2.2.6
+  cupertino_icons: ^1.0.2  # Dependency for Cupertino icons. It provides a set of icons that are designed for use with Apple's Cupertino widgets.
+  provider: ^6.0.5  # Dependency for state management. It allows you to manage and share state between widgets in an efficient and scalable way.
+  http: ^0.13.6  # Dependency for making HTTP requests. It provides classes and functions for performing HTTP operations, such as making GET and POST requests.
+  flutter_secure_storage: ^8.0.0  # Dependency for secure storage. It provides a way to securely store sensitive information, such as authentication tokens or API keys, on the device.
+  flutter_barcode_scanner: ^2.0.0  # Dependency for barcode scanning. It allows you to scan barcodes using the device's camera.
+  path_provider: ^2.0.15  # Dependency for accessing the device's file system. It provides methods for obtaining directories and files on the device.
+  sqflite: ^2.2.8+2  # Dependency for SQLite database integration. It allows you to interact with an SQLite database by providing a set of APIs for executing queries and managing data.
+  url_launcher: ^6.1.11 # Dependency for launching URLs. It provides a way to open URLs in the device's web browser or other installed apps.
+  google_maps_flutter: ^2.2.6 # Dependency for integrating Google Maps. It allows you to embed Google Maps in your Flutter application and interact with map-related functionality.
+  qr_code_scanner: ^1.0.1 # Dependency for scanning QR codes. It provides a QR code scanner widget that can be used to scan and decode QR codes using the device's camera.
+  shared_preferences: ^2.1.1 # Dependency for storing simple data in key-value pairs. It provides a persistent storage solution for storing and retrieving small amounts of data.
+  uuid: ^3.0.7 # Dependency for generating universally unique identifiers (UUIDs). It allows you to generate unique identifiers that can be used for various purposes, such as assigning unique IDs to objects.
+  flutter_riverpod: ^2.3.6 #  Dependency for state management using the Riverpod package. It provides a declarative way to manage and consume state in your Flutter application.
+  intl: ^0.18.1 # Dependency for internationalization and localization support. It provides a set of APIs and tools for formatting and translating text based on the user's locale.
 
 dev_dependencies:  # Specifies development-only dependencies
   flutter_test:  # Flutter testing dependency

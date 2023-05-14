@@ -1,4 +1,4 @@
-import 'package:damproject/config/config.dart';
+import 'package:damproject/resources/resources.dart';
 import 'package:flutter/material.dart';
 
 // This code defines a NotificationsService class that provides a convenient way to display snackbars in a Flutter application.
