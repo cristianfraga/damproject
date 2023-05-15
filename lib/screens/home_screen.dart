@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const HeaderAvatar(),
+              HeaderAvatar(),
               const SizedBox(height: 20),
               _buildInputField(
                 context,

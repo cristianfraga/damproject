@@ -1,5 +1,6 @@
 import 'package:damproject/providers/providers.dart';
 import 'package:damproject/resources/resources.dart';
+import 'package:damproject/ui/ui.dart';
 import 'package:damproject/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,8 @@ class BusinessCardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Access the HeaderFormProvider instance using Provider.of.
-    final headerForm = Provider.of<HeaderFormProvider>(context);
+    final headerForm = Provider.of<HeaderFormProvider>(context, listen: false);
+    final formProvider = Provider.of<BusinessCardFormProvider>(context, listen: false);
 
     return Scaffold(
       appBar: const CustomAppBarBackHome(
@@ -20,7 +22,7 @@ class BusinessCardScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const HeaderAvatar(),
+              HeaderAvatar(),
               const SizedBox(height: 10),
               _buildInputField(
                 context,
@@ -29,9 +31,9 @@ class BusinessCardScreen extends StatelessWidget {
                     ? headerForm.fullName
                     : fullNameHint,
                 24,
-                    (value) {
-                      // Update the fullName property of the HeaderFormProvider.
-                      headerForm.fullName = value;
+                (value) {
+                  // Update the fullName property of the HeaderFormProvider.
+                  headerForm.fullName = value;
                 },
               ),
               const SizedBox(height: 5),
@@ -42,9 +44,9 @@ class BusinessCardScreen extends StatelessWidget {
                     ? headerForm.profession
                     : professionHint,
                 20,
-                    (value) {
-                      // Update the profession property of the HeaderFormProvider.
-                      headerForm.profession = value;
+                (value) {
+                  // Update the profession property of the HeaderFormProvider.
+                  headerForm.profession = value;
                 },
               ),
               const SizedBox(height: 10),
@@ -53,31 +55,15 @@ class BusinessCardScreen extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.75,
-                    child: Expanded(
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: contactPhoneInput,
-                          prefixIcon: Icon(Icons.phone),
-                        ),
+                    child: TextFormField(
+                      decoration: InputDecorations.inputDecoration(
+                        labelText: contactPhoneInput,
+                        hintText: contactPhoneInput,
+                        prefixIcon: Icons.phone,
                       ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.75,
-                    child: Expanded(
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: personalEmailInput,
-                          prefixIcon: Icon(Icons.email),
-                        ),
-                      ),
+                      onChanged: (value) {
+                        formProvider.updateContactPhone(value);
+                      },
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -89,13 +75,15 @@ class BusinessCardScreen extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.75,
-                    child: Expanded(
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: personalWebsiteInput,
-                          prefixIcon: Icon(Icons.language),
-                        ),
+                    child: TextFormField(
+                      decoration: InputDecorations.inputDecoration(
+                        labelText: personalEmailInput,
+                        hintText: personalEmailInput,
+                        prefixIcon: Icons.email,
                       ),
+                      onChanged: (value) {
+                        formProvider.updatePersonalEmail(value);
+                      },
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -103,16 +91,51 @@ class BusinessCardScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.75,
+                    child: TextFormField(
+                      decoration: InputDecorations.inputDecoration(
+                        labelText: personalWebsiteInput,
+                        hintText: personalWebsiteInput,
+                        prefixIcon: Icons.language,
+                      ),
+                      onChanged: (value) {
+                        formProvider.updatePersonalWebsite(value);
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                ],
+              ),
+              const SizedBox(height: 30),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: TextFormField(
-                      decoration: const InputDecoration(hintText: addressInput),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 45),
+                      child: TextFormField(
+                        decoration: InputDecorations.inputDecoration(
+                          labelText: addressInput,
+                          hintText: addressInput,
+                          prefixIcon: Icons.place,
+                        ),
+                        maxLines: 5,
+                        onChanged: (value) {
+                          formProvider.updateAddress(value);
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(width: 10),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,
-                    child: Image.asset(mapImage, width: 50, height: 50),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 50),
+                      child: Image.asset(mapImage, width: 100, height: 120),
+                    ),
                   ),
                 ],
               ),
@@ -126,11 +149,11 @@ class BusinessCardScreen extends StatelessWidget {
 
   // A helper method to build an input field widget.
   Widget _buildInputField(
-      BuildContext context,
-      String hint,
-      double fontSize,
-      Function(String) onChanged,
-      ) {
+    BuildContext context,
+    String hint,
+    double fontSize,
+    Function(String) onChanged,
+  ) {
     return SizedBox(
       height: 40,
       child: TextFormField(
@@ -145,7 +168,8 @@ class BusinessCardScreen extends StatelessWidget {
         ),
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: TextStyle(color: white.withOpacity(0.5), shadows: const []),
+          hintStyle:
+              TextStyle(color: white.withOpacity(0.5), shadows: const []),
           border: InputBorder.none,
         ),
         onChanged: onChanged,

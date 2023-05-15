@@ -1,6 +1,6 @@
 const String emailRegex = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
-const String appLogo = 'assets/images/icon01.png';
-const String mapImage = 'path/to/map_image.jpg';
+const String appLogo = 'assets/images/logo.png';
+const String mapImage = 'assets/images/map.png';
 
 const String appTitle = 'MyBrand';
 const String businessCardButton = 'BUSINESS CARD';

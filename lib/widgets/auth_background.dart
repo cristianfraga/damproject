@@ -20,7 +20,7 @@ class AuthBackground extends StatelessWidget {
       child: Stack(
         children: [
           const _ColorBox(),
-          const Positioned(top: 30, left: 0, right: 0, child: HeaderAvatar()),
+          Positioned(top: 30, left: 0, right: 0, child: HeaderAvatar()),
           child,
         ],
       ),

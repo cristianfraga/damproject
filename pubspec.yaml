@@ -14,7 +14,6 @@ dependencies:  # Specifies the project dependencies
   provider: ^6.0.5  # Dependency for state management. It allows you to manage and share state between widgets in an efficient and scalable way.
   http: ^0.13.6  # Dependency for making HTTP requests. It provides classes and functions for performing HTTP operations, such as making GET and POST requests.
   flutter_secure_storage: ^8.0.0  # Dependency for secure storage. It provides a way to securely store sensitive information, such as authentication tokens or API keys, on the device.
-  flutter_barcode_scanner: ^2.0.0  # Dependency for barcode scanning. It allows you to scan barcodes using the device's camera.
   path_provider: ^2.0.15  # Dependency for accessing the device's file system. It provides methods for obtaining directories and files on the device.
   sqflite: ^2.2.8+2  # Dependency for SQLite database integration. It allows you to interact with an SQLite database by providing a set of APIs for executing queries and managing data.
   url_launcher: ^6.1.11 # Dependency for launching URLs. It provides a way to open URLs in the device's web browser or other installed apps.
@@ -24,6 +23,10 @@ dependencies:  # Specifies the project dependencies
   uuid: ^3.0.7 # Dependency for generating universally unique identifiers (UUIDs). It allows you to generate unique identifiers that can be used for various purposes, such as assigning unique IDs to objects.
   flutter_riverpod: ^2.3.6 #  Dependency for state management using the Riverpod package. It provides a declarative way to manage and consume state in your Flutter application.
   intl: ^0.18.1 # Dependency for internationalization and localization support. It provides a set of APIs and tools for formatting and translating text based on the user's locale.
+  flutter_keyboard_visibility: ^5.4.1
+  image_picker: ^0.8.7+5
+  flutter_image_compress: ^2.0.3
+  permission_handler: ^10.2.0
 
 dev_dependencies:  # Specifies development-only dependencies
   flutter_test:  # Flutter testing dependency
@@ -33,4 +36,5 @@ dev_dependencies:  # Specifies development-only dependencies
 flutter:  # Flutter-specific configuration
   uses-material-design: true  # Specifies that the project uses the Material Design
   assets:  # Specifies the project's assets
-    - assets\images\icon01.png  # Path to the asset file
+    - assets\images\logo.png
+    - assets\images\map.png

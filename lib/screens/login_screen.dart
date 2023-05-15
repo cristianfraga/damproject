@@ -84,7 +84,7 @@ class _LoginForm extends StatelessWidget {
           TextFormField(
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
-            decoration: InputDecorations.authInputDecoration(
+            decoration: InputDecorations.inputDecoration(
                 labelText: emailInput,
                 hintText: emailHint,
                 prefixIcon: Icons.email_outlined),
@@ -99,7 +99,7 @@ class _LoginForm extends StatelessWidget {
             autocorrect: false,
             obscureText: true,
             keyboardType: TextInputType.visiblePassword,
-            decoration: InputDecorations.authInputDecoration(
+            decoration: InputDecorations.inputDecoration(
                 labelText: passwordInput,
                 hintText: passwordHint,
                 prefixIcon: Icons.lock_outline),
